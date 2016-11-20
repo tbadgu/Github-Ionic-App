@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Task } from '../../models/task';
 
+declare var LightstreamerClient: any;
+declare var Subscription: any;
+
 @Component({
   selector: 'page-mytask',
   templateUrl: 'mytask.html'
@@ -9,6 +12,8 @@ import { Task } from '../../models/task';
 
 export class MytaskPage {
   tasks: Task[] ;
+  LSClient: any;
+  subscription: any;
 
   constructor(public navCtrl: NavController,
               public alertCtrl: AlertController) {
@@ -27,7 +32,8 @@ export class MytaskPage {
         low:0,
         desc: 'My second task'
       }
-  ];
+    ];
+    this.setupLSConn();
   }
 
   ionViewDidLoad() {
@@ -43,4 +49,36 @@ export class MytaskPage {
     alert.present();
   }
 
+  setupLSConn() {
+        this.LSClient = new LightstreamerClient("http://localhost:8080", "DEMO");
+
+        this.LSClient.addListener({
+          onServerError: (errorCode, errorMessage) => {
+            console.log(errorMessage);
+          },
+          onStatusChange: (status) => {
+            console.log(status);
+          }
+        });
+        this.LSClient.connect();
+        /*
+        For subscription:
+        this.subscription = new Subscription("MERGE", "", "");
+        this.subscription.setDataAdapter("QUOTE_ADAPTER");
+        this.subscription.addListener({
+            onItemUpdate: (updateObject) => {
+                var itemName = updateObject.getItemName();
+                updateObject.forEachChangedField((fieldName, fieldPos, val) => {
+                      var itemIndex = this.itemNames.indexOf(itemName);
+                      var fieldIndex = this.fieldNames.indexOf(fieldName);
+                      console.assert(fieldIndex != -1);
+                      console.assert(itemIndex != -1);
+                      this.stocks[itemIndex][fieldIndex] = val;
+                      this.ref.detectChanges();
+                });
+            }
+        });
+        this.LSClient.subscribe(this.subscription);
+        */
+  }
 }
