@@ -6,6 +6,7 @@ import { ReposPage } from '../pages/repos/repos';
 import { OrganisationsPage } from '../pages/organisations/organisations';
 import { GithubUsers } from '../providers/github-users';
 import { UserDetailsPage } from '../pages/user-details/user-details';
+import { MytaskPage } from '../pages/mytask/mytask';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { UserDetailsPage } from '../pages/user-details/user-details';
     UsersPage,
     ReposPage,
     OrganisationsPage,
-    UserDetailsPage
+    UserDetailsPage,
+    MytaskPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,7 +26,8 @@ import { UserDetailsPage } from '../pages/user-details/user-details';
     UsersPage,
     ReposPage,
     OrganisationsPage,
-    UserDetailsPage
+    UserDetailsPage,
+    MytaskPage
   ],
   providers: [GithubUsers]
 })

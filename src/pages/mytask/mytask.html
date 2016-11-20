@@ -1,0 +1,35 @@
+<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+<script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      My Tasks Sidebar App
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    My Tasks
+    <ion-badge color="secondary">10</ion-badge>
+  </ion-item>
+  <div class="row header">
+    <div class="col">Task</div>
+    <div class="col">High</div>
+    <div class="col">Medium</div>
+    <div class="col">Low</div>
+    <div class="col"></div>
+  </div>
+  <div class="row" *ngFor="let task of tasks">
+    <div class="col">{{task.name}}</div>
+    <div class="col">{{task.high}}</div>
+    <div class="col">{{task.medium}}</div>
+    <div class="col">{{task.low}}</div>
+    <div class="col"><button class="button" (click)="gotoApp(task.name)">Go</button></div>
+  </div>
+</ion-content>
